@@ -35,3 +35,18 @@ async function uploadFile(file) {
         console.error('Error uploading file:', error);
     }
 }
+// Get user's files
+async function getUserFiles() {
+    try {
+        const response = await fetch('https://YOUR_API_GATEWAY_URL/files', {
+            headers: {
+                'Authorization': `Bearer ${(await Auth.currentSession()).idToken.jwtToken}`
+            }
+        });
+        
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching files:', error);
+        return [];
+    }
+}
